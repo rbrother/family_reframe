@@ -8,3 +8,7 @@
  ::initialize-db
  (fn [_ _]
    db/default-db))
+
+(re-frame/reg-event-db
+  :set-value
+  (fn [db [_ data-path value]] (assoc-in db data-path value)))

@@ -1,0 +1,13 @@
+table.even-odd {
+    border-collapse: collapse;
+    border: 2px solid;
+}
+
+table.even-odd tr:nth-child(even) {background: #EEE}
+table.even-odd tr:nth-child(odd) {background: #DDD}
+
+td, th {
+    text-align: left;
+    padding: 1mm;
+    vertical-align: text-top; /* allows labels and inputs all align! :-) */
+}
