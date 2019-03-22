@@ -10,9 +10,9 @@
    (let [persons @(re-frame/subscribe [:filtered-persons])]
      [:div (count persons) " persons"])])
 
-(defn format-name [{:keys [first last called orig-last]}]
+(defn format-name [ id {:keys [first last called orig-last]}]
   (let [show-called (and called (not= called "") (not= called first))]
-    [:span first
+    [:span.link { :on-click #(re-frame/dispatch [:show-person id])  } first
      (if show-called (str " (" called ")")) " "
      [:span {:style {:font-weight "bold"}} last]]))
 
@@ -29,7 +29,7 @@
   [:tr
    [:td id]
    [:td (format-image id (first images))]
-   [:td {:style { :width "9cm"}} (format-name person-name) (if profession [:span ", " profession])]
+   [:td {:style { :width "9cm"}} (format-name id person-name) (if profession [:span ", " profession])]
    [:td {:style { :width "8cm"}} (format-life birth death)]])
 
 (defn person-list []

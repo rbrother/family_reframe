@@ -12,6 +12,6 @@ td, th {
     vertical-align: top; /* 'text-top' allows labels and inputs all align! :-) */
 }
 
-.header {
-    font-size: small;
-}
+.header { font-size: small; }
+
+.link { color: blue; text-decoration: underline; }

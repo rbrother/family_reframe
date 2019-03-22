@@ -12,3 +12,7 @@
 (re-frame/reg-event-db
   :set-value
   (fn [db [_ data-path value]] (assoc-in db data-path value)))
+
+(re-frame/reg-event-db
+  :show-person
+  (fn [db [_ id]] (assoc db :current-person id :page :person-page)))
