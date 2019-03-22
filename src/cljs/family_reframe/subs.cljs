@@ -1,13 +1,21 @@
 (ns family-reframe.subs
   (:require
-   [re-frame.core :as re-frame]
-   [clojure.string :as str]))
+    [clojure.string :as str]
+    [re-frame.core :as re-frame]
+    [family-reframe.utils :as utils]))
 
 (re-frame/reg-sub :persons (fn [ db _ ] (:persons db) ))
 
 (re-frame/reg-sub :filter-text (fn [ db _ ] (:filter-text db) ))
 
 (re-frame/reg-sub :page (fn [ db _ ] (:page db) ))
+
+(re-frame/reg-sub
+  :persons-index
+  :<- [:persons]
+  (fn [ persons _] (utils/index-by-id persons)))
+
+
 
 (defn person-index-entry [p]
   { :text (str/upper-case (str p)) :person p } )
