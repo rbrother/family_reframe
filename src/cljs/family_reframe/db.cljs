@@ -162,8 +162,8 @@
    } )
 
 (defn map-family [ family ]
-  {:parents (vec (map (comp to-keyword content) (elements family :ParentID)))
-   :children (vec (map (comp to-keyword content) (elements family :ChildID)))})
+  {:parents (set (map (comp to-keyword content) (elements family :ParentID)))
+   :children (set (map (comp to-keyword content) (elements family :ChildID)))})
 
 (def default-db
   {:persons (vec (map map-person persons-raw))

@@ -10,7 +10,6 @@
 
 (defn main-panel []
   (let [page @(re-frame/subscribe [:page])]
-    (println "Page: " page)
     [:div
      [header]
      (case page

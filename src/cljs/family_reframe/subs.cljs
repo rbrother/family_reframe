@@ -10,12 +10,32 @@
 
 (re-frame/reg-sub :page (fn [ db _ ] (:page db) ))
 
+(re-frame/reg-sub :current-person (fn [ db _ ] (:current-person db) ))
+
+(re-frame/reg-sub :families (fn [ db _ ] (:families db)))
+
 (re-frame/reg-sub
   :persons-index
   :<- [:persons]
   (fn [ persons _] (utils/index-by-id persons)))
 
+(defn expand-person [id] @(re-frame/subscribe [:person-descendants id]))
 
+(defn expand-family [parent-id {:keys [parents children]}]
+  (let [spouse-id (first (disj parents parent-id))
+        person-index @(re-frame/subscribe [:persons-index])]
+    {:spouse (person-index spouse-id)
+     :children (map expand-person children)}))
+
+(re-frame/reg-sub
+  :person-descendants
+  :<- [:persons-index]
+  :<- [:families]
+  (fn [ [ person-index families ] [ _ id ] ]
+    (let [families-selector (fn [{parents :parents}] (get parents id))
+          raw-families (filter families-selector families)]
+      (assoc (person-index id)
+        :families (map (partial expand-family id) raw-families)))))
 
 (defn person-index-entry [p]
   { :text (str/upper-case (str p)) :person p } )
@@ -41,3 +61,4 @@
            (sort-by person-sort-func)))))
 
 (re-frame/reg-sub :value (fn [ db [_ data-path]] (get-in db data-path)))
+

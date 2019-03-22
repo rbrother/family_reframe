@@ -4,4 +4,6 @@
             [family-reframe.view.html :as html]))
 
 (defn person-page []
-  [:div "Person page"])
+  (let [current-person @(re-frame/subscribe [:current-person])
+        person-desc @(re-frame/subscribe [:person-descendants current-person])]
+    [:div "Person page " person-desc]))
