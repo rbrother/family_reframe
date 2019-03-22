@@ -3,13 +3,11 @@
    [re-frame.core :as re-frame]
    [clojure.string :as str]))
 
-(re-frame/reg-sub
-  :persons
-  (fn [ db _ ] (:persons db) ))
+(re-frame/reg-sub :persons (fn [ db _ ] (:persons db) ))
 
-(re-frame/reg-sub
-  :filter-text
-  (fn [ db _ ] (:filter-text db) ))
+(re-frame/reg-sub :filter-text (fn [ db _ ] (:filter-text db) ))
+
+(re-frame/reg-sub :page (fn [ db _ ] (:page db) ))
 
 (defn person-index-entry [p]
   { :text (str/upper-case (str p)) :person p } )

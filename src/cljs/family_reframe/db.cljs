@@ -148,4 +148,5 @@
 
 (def default-db
   { :persons (map map-person persons-raw)
-   :families families-raw } )
+   :families families-raw
+   :page :person-list} )
