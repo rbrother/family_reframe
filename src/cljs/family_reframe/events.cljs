@@ -17,6 +17,10 @@
   (fn [db [_ id]] (assoc db :current-person id :page :person-page)))
 
 (re-frame/reg-event-db
+  :select-generations
+  (fn [db [_ n]] (assoc db :generations n)))
+
+(re-frame/reg-event-db
   :show-person-list
   (fn [db [_ id]]
     (-> db (dissoc :current-person) (assoc :page :person-list))))

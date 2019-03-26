@@ -23,3 +23,8 @@ table.tree td { padding: 0;}
 .link { color: blue; text-decoration: underline; }
 
 .center { text-align: center; }
+
+button.gen {
+    margin: 1mm; position: relative; top: -1mm;
+    font-size: large; font-weight: bold;
+}

@@ -12,6 +12,8 @@
 
 (re-frame/reg-sub :current-person (fn [ db _ ] (:current-person db) ))
 
+(re-frame/reg-sub :generations (fn [ db _ ] (:generations db) ))
+
 (re-frame/reg-sub :families (fn [ db _ ] (:families db)))
 
 (re-frame/reg-sub

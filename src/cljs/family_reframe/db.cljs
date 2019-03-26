@@ -186,4 +186,5 @@
 (def default-db
   {:persons (vec (map map-person persons-raw))
    :families (vec (map map-family families-raw))
-   :page :person-list} )
+   :page :person-list
+   :generations 2} )

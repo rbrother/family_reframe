@@ -16,7 +16,6 @@
   (let [storage-ref (-> js/firebase .storage .ref)
         image-path (str "persons/" (clojure.string/upper-case (name person-id)) "-" image-name)
         image-ref (.child storage-ref image-path)]
-    (println image-path)
     (-> image-ref (.getDownloadURL) (.then (fn [url] (set-image-src image-path url))))
     ; Set only id of the image now... the callback above will set the src later when URL retrieved
     [:img (merge {:id image-path} (if width {:width width} {}))]))

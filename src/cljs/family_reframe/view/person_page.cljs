@@ -29,7 +29,7 @@
      [:tbody
       [:tr [:th "Gender"] [:td (str/capitalize (name gender))]]
       [:tr [:th "Birth"] [:td (format-birth birth)]]
-      (if death [:tr [:th "Birth"] [:td (format-birth birth)]])
+      (if death [:tr [:th "Death"] [:td (format-birth death)]])
       (if contact (format-contact contact))
       (if profession [:tr [:th "Profession"] [:td profession]] )
       (if career [:tr [:th "Career"] [:td career]])
@@ -47,7 +47,6 @@
     [:tr (map (partial map-image id) images)])
 
 (defn person-pictures [ { id :id images :images}]
-  (println images)
   (let [groups (partition-all 3 images)]
     [:table [:tbody (map (partial image-row id ) groups)]]))
 
@@ -107,9 +106,24 @@
             (if (> generations 0)
               (mapcat (partial family-tree (dec generations)) families)))]]))
 
+; ------------- ancestor tree -------------
+
+(defn ancestor-tree [ generations pid ]
+  "xxx")
+
+(defn generation-button [n]
+  (let [selected-generations @(re-frame/subscribe [:generations])]
+    ^{:key n} [:button.gen
+               {:style {:background (if (= selected-generations n) "#faa" "#bbb")}
+                :on-click #(re-frame/dispatch [:select-generations n])}
+                (str n)]))
+
+(defn generation-buttons [] (doall (map generation-button (range 1 4))))
+
 (defn person-page []
   (let [current-person @(re-frame/subscribe [:current-person])
-        person @(re-frame/subscribe [:person-with-families current-person])]
+        person @(re-frame/subscribe [:person-with-families current-person])
+        generations @(re-frame/subscribe [:generations])]
     [:div
      [:h2 [:span.link {:on-click #(re-frame/dispatch [:show-person-list])} "Family Database"]
       " - "
@@ -119,5 +133,7 @@
        [:tr
         [:td (person-properties person)]
         [:td (person-pictures person)]]]]
-     [:h2 "Descendant tree"]
-     (descendant-tree 2 (:id person)) ]))
+     [:h2 "Ancestor tree - Generations" (generation-buttons) ]
+     [ancestor-tree generations (:id person)]
+     [:h2 "Descendant tree - Generations " (generation-buttons) ]
+     [descendant-tree generations (:id person)] ]))
