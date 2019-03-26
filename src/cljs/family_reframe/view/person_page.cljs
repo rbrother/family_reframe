@@ -47,7 +47,8 @@
     [:tr (map (partial map-image id) images)])
 
 (defn person-pictures [ { id :id images :images}]
-  (let [groups (partition 3 images)]
+  (println images)
+  (let [groups (partition-all 3 images)]
     [:table [:tbody (map (partial image-row id ) groups)]]))
 
 ; Descendant tree
@@ -82,27 +83,29 @@
    [:td ]
    [:td ]])
 
-(defn family-row [{:keys [spouse children]}]
+(defn family-row [{:keys [spouse children]} generations]
   [:tr
    [:td ]
    [:td [ person-box spouse true  ] ]
    [:td [:img {:src line-right-url}] ]
    [:td {:style {:border-left "solid black 3px"}}
-    (doall (map descendant-tree children))]])
+    (doall (map (partial descendant-tree generations) children))]])
 
-(defn family-tree [family]
+(defn family-tree [ generations family]
   (list
     ^{:key (str "Join" (-> family :spouse))}
     [:tr [:td] [:td.center [:img {:src join-url}]] [:td] [:td]]
     ^{:key (-> family :spouse)}
-    [family-row family]))
+    [family-row family generations]))
 
-(defn descendant-tree [ pid ]
+(defn descendant-tree [ generations pid ]
   (let [{:keys [id families]} @(re-frame/subscribe [:person-with-families pid])]
     ^{:key id}
     [:div {:style {:margin-top "2mm"}}
      [:table.tree
-      (into [:tbody [person-row id false]] (mapcat family-tree families))]]))
+      (into [:tbody [person-row id false]]
+            (if (> generations 0)
+              (mapcat (partial family-tree (dec generations)) families)))]]))
 
 (defn person-page []
   (let [current-person @(re-frame/subscribe [:current-person])
@@ -117,4 +120,4 @@
         [:td (person-properties person)]
         [:td (person-pictures person)]]]]
      [:h2 "Descendant tree"]
-     (descendant-tree (:id person)) ]))
+     (descendant-tree 2 (:id person)) ]))
