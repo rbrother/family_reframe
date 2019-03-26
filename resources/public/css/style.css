@@ -1,7 +1,11 @@
+body { font-family: Arial, Helvetica, sans-serif;}
+
 table.even-odd {
     border-collapse: collapse;
     border: 2px solid;
 }
+
+table.tree { border-collapse: collapse; border-spacing: 0; }
 
 table.even-odd tr:nth-child(even) {background: #EEE}
 table.even-odd tr:nth-child(odd) {background: #DDD}
@@ -12,6 +16,10 @@ td, th {
     vertical-align: top; /* 'text-top' allows labels and inputs all align! :-) */
 }
 
+table.tree td { padding: 0;}
+
 .header { font-size: small; }
 
 .link { color: blue; text-decoration: underline; }
+
+.center { text-align: center; }

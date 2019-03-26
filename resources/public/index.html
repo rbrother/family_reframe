@@ -7,6 +7,19 @@
   </head>
   <body>
     <div id="app"></div>
+    <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyDvaMRFcRuvJuDsTopc8fNtvTBfTvJbFms",
+            authDomain: "family-brotherus.firebaseapp.com",
+            databaseURL: "https://family-brotherus.firebaseio.com",
+            projectId: "family-brotherus",
+            storageBucket: "family-brotherus.appspot.com",
+            messagingSenderId: "235390785600"
+        };
+        firebase.initializeApp(config);
+    </script>
     <script src="js/compiled/app.js"></script>
     <script>family_reframe.core.init();</script>
   </body>

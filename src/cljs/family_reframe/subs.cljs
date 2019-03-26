@@ -19,16 +19,18 @@
   :<- [:persons]
   (fn [ persons _] (utils/index-by-id persons)))
 
-(defn expand-person [id] @(re-frame/subscribe [:person-descendants id]))
-
 (defn expand-family [parent-id {:keys [parents children]}]
-  (let [spouse-id (first (disj parents parent-id))
-        person-index @(re-frame/subscribe [:persons-index])]
-    {:spouse (person-index spouse-id)
-     :children (map expand-person children)}))
+  (let [spouse-id (first (disj parents parent-id))]
+    {:spouse spouse-id
+     :children children}))
 
 (re-frame/reg-sub
-  :person-descendants
+  :person
+  :<- [:persons-index]
+  (fn [person-index [_ id]] (get person-index id)))
+
+(re-frame/reg-sub
+  :person-with-families
   :<- [:persons-index]
   :<- [:families]
   (fn [ [ person-index families ] [ _ id ] ]
