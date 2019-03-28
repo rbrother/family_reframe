@@ -82,34 +82,37 @@
    [:td ]
    [:td ]])
 
-(defn family-row [{:keys [spouse children]} generations]
+(defn get-person [pid] @(re-frame/subscribe [:person-with-families pid]))
+
+(defn family-row [spouse children-ids generations]
   [:tr
    [:td ]
    [:td [ person-box spouse true  ] ]
    [:td [:img {:src line-right-url}] ]
    [:td {:style {:border-left "solid black 3px"}}
-    (doall (map (partial descendant-tree generations) children))]])
+    (let [children (->> children-ids (map get-person) )
+        sorted-children (sort-by (fn [c] (get-in c [:birth :time])) children)]
+      (doall (map (partial descendant-tree generations) sorted-children)))  ]]  )
 
-(defn family-tree [ generations family]
+(defn family-tree [ generations { spouse :spouse children-ids :children }]
   (list
-    ^{:key (str "Join" (-> family :spouse))}
+    ^{:key (str "Join" spouse)}
     [:tr [:td] [:td.center [:img {:src join-url}]] [:td] [:td]]
-    ^{:key (-> family :spouse)}
-    [family-row family generations]))
+    ^{:key spouse}
+    [family-row spouse children-ids generations]))
 
-(defn descendant-tree [ generations pid ]
-  (let [{:keys [id families]} @(re-frame/subscribe [:person-with-families pid])]
+(defn descendant-tree [ generations {:keys [id families]} ]
     ^{:key id}
     [:div {:style {:margin-top "2mm"}}
      [:table.tree
       (into [:tbody [person-row id false]]
             (if (> generations 0)
-              (mapcat (partial family-tree (dec generations)) families)))]]))
+              (mapcat (partial family-tree (dec generations)) families)))]])
 
 ; ------------- ancestor tree -------------
 
-(defn ancestor-tree [ generations pid ]
-  "xxx")
+(defn ancestor-tree [ generations person ]
+    (:parents person))
 
 (defn generation-button [n]
   (let [selected-generations @(re-frame/subscribe [:generations])]
@@ -134,6 +137,6 @@
         [:td (person-properties person)]
         [:td (person-pictures person)]]]]
      [:h2 "Ancestor tree - Generations" (generation-buttons) ]
-     [ancestor-tree generations (:id person)]
+     (ancestor-tree generations person)
      [:h2 "Descendant tree - Generations " (generation-buttons) ]
-     [descendant-tree generations (:id person)] ]))
+     (descendant-tree generations person) ]))

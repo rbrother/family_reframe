@@ -36,10 +36,13 @@
   :<- [:persons-index]
   :<- [:families]
   (fn [ [ person-index families ] [ _ id ] ]
-    (let [families-selector (fn [{parents :parents}] (get parents id))
-          raw-families (filter families-selector families)]
+    (let [families-selector (fn [{parents :parents}] (get parents id))           
+          raw-families (filter families-selector families)
+          parent-fam-selector (fn [{children :children}] (get children id))
+          parents-family (first (filter parent-fam-selector families))]
       (assoc (person-index id)
-        :families (map (partial expand-family id) raw-families)))))
+        :families (map (partial expand-family id) raw-families)
+        :parents (:parents parents-family)))))
 
 (defn person-index-entry [p]
   { :text (str/upper-case (str p)) :person p } )
