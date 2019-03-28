@@ -10,13 +10,14 @@
 
 (defn set-image-src [image-id url]
   (let [image (-> js/document (.getElementById image-id))]
-    (set! (.-src image) url)))
+    (if image (set! (.-src image) url))))
 
 (defn image [ person-id image-name width]
   (let [storage-ref (-> js/firebase .storage .ref)
         image-path (str "persons/" (clojure.string/upper-case (name person-id)) "-" image-name)
-        image-ref (.child storage-ref image-path)]
-    (-> image-ref (.getDownloadURL) (.then (fn [url] (set-image-src image-path url))))
+        image-ref (.child storage-ref image-path)
+        set-src-func (fn [url] (set-image-src image-path url))]
+    (-> image-ref (.getDownloadURL) (.then set-src-func))
     ; Set only id of the image now... the callback above will set the src later when URL retrieved
     [:img (merge {:id image-path} (if width {:width width} {}))]))
 

@@ -161,7 +161,10 @@
   (let [death (:attrs (element p :Death))
         miscellaneous (content (element p :Miscallaneous))
         hidden-comment (content (element p :HiddenComment))
-        profession (content (element p :Profession))]
+        profession (content (element p :Profession))
+        raw-career (:content (element p :Career))
+        career (if (and raw-career (not= "" (str raw-career)))
+                 (into [:div] (map to-hiccup raw-career)))]
     (merge
       {:child-info-missing (= childInfoMissing "true")
        :id (to-keyword id)
@@ -170,8 +173,8 @@
        :images (vec (map-images (element p :Images)))
        :birth (:attrs (element p :Birth))
        :contact (map-contact (element p :Contact))
-       :career (into [:div] (map to-hiccup (:content (element p :Career))))
        }
+      (if career {:career career})
       (if (and death (:time death)) {:death death})
       (if (and miscellaneous (not= "" (clojure.string/trim (str miscellaneous))))
         {:miscellaneous miscellaneous})
