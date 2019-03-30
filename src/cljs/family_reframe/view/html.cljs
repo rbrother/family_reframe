@@ -1,6 +1,10 @@
 (ns family-reframe.view.html
   (:require [re-frame.core :as re-frame]))
 
+(defn horiz-stack [ & items]
+  [:table [:tbody 
+    (into [:tr] (map (fn [i] [:td i]) items))    ]])
+
 (defn input-field [ data-path chars ]
   (let [current-value @(re-frame/subscribe [:value data-path])
         dispatcher #(re-frame/dispatch [:set-value data-path (-> % .-target .-value)]) ]
@@ -15,11 +19,12 @@
 (defn image [ person-id image-name width]
   (let [storage-ref (-> js/firebase .storage .ref)
         image-path (str "persons/" (clojure.string/upper-case (name person-id)) "-" image-name)
+        image-id (str (random-uuid))
         image-ref (.child storage-ref image-path)
-        set-src-func (fn [url] (set-image-src image-path url))]
+        set-src-func (fn [url] (set-image-src image-id url))]
     (-> image-ref (.getDownloadURL) (.then set-src-func))
     ; Set only id of the image now... the callback above will set the src later when URL retrieved
-    [:img (merge {:id image-path} (if width {:width width} {}))]))
+    [:img (merge {:id image-id} (if width {:width width} {}))]))
 
 (defn format-name [ {:keys [first last called orig-last]} id ]
   (let [show-called (and called (not= called "") (not= called first))]

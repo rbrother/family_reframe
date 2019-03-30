@@ -56,48 +56,52 @@
 (def join-url "https://firebasestorage.googleapis.com/v0/b/family-brotherus.appspot.com/o/join.png?alt=media&token=15804a57-6857-41ed-b63c-7604d9cc6f24")
 (def line-right-url "https://firebasestorage.googleapis.com/v0/b/family-brotherus.appspot.com/o/line-right.png?alt=media&token=abc20134-d0f4-4a08-b7d3-db28f5ddd012" )
 
+(def arrow-right [:img {:src arrow-right-url}])
+(def line-right [:img {:src line-right-url}])
+(def join-pic [:img {:src join-url}])
+
 (declare descendant-tree)
 
-(defn person-box [pid spouse]
+(defn person-box [pid is-spouse]
   (let [person @(re-frame/subscribe [:person pid])
         {:keys [images gender birth death profession]} person
         border-color (if (= gender :male) "#0000ff" "#ff0000")
-        bg-color (if spouse "#ffccff" "#ffffcc")]
-    [:div {:style {:border (str "solid 3px " border-color)
-                   :background bg-color
-                   :font-size "smaller"
-                   :max-width "300px"}}
-     [:table [:tbody [:tr
-                      [:td (if (first images) (html/image pid "small.png" nil))]
-                      [:td
-                       (html/format-name (:name person) pid)
-                       (if profession [:span ", " profession])
-                       (html/format-life birth death)]]]]]))
+        bg-color (if is-spouse "#ffccff" "#ffffcc")]
+    [:table [:tbody [:tr 
+      [:td.middle {:style {:width "1cm"}} (if-not is-spouse arrow-right) ]    
+      [:td.person-box {:style {
+                      :border-color border-color
+                      :background bg-color }}
+        (html/horiz-stack (if (first images) (html/image pid "small.png" nil))
+                     [:div (html/format-name (:name person) pid)
+                          (if profession [:span ", " profession])
+                          (html/format-life birth death)])    ]]]]))
 
-(defn person-row [pid]
+(defn person-row [pid is-spouse]
   ^{:key pid}
   [:tr
-   [:td [:img {:src arrow-right-url}]]
-   [:td [ person-box pid ]]
+   [:td [ person-box pid is-spouse]]
    [:td ]
    [:td ]])
 
 (defn get-person [pid] @(re-frame/subscribe [:person-with-families pid]))
 
 (defn family-row [spouse children-ids generations]
-  [:tr
-   [:td ]
-   [:td [ person-box spouse true  ] ]
-   [:td [:img {:src line-right-url}] ]
-   [:td {:style {:border-left "solid black 3px"}}
-    (let [children (->> children-ids (map get-person) )
+  (let [children (->> children-ids (map get-person) )
         sorted-children (sort-by (fn [c] (get-in c [:birth :time])) children)]
-      (doall (map (partial descendant-tree generations) sorted-children)))  ]]  )
+  [:tr
+   [:td [ person-box spouse true  ] ]
+   (if (first children) 
+     (list 
+        ^{:key :arrow} [:td line-right ]
+        ^{:key :children} [:td {:style {:border-left "solid black 3px"}}
+          (doall (map (partial descendant-tree generations) sorted-children))  ]
+          ))]))
 
 (defn family-tree [ generations { spouse :spouse children-ids :children }]
   (list
     ^{:key (str "Join" spouse)}
-    [:tr [:td] [:td.center [:img {:src join-url}]] [:td] [:td]]
+    [:tr [:td.center [:img {:src join-url}]] [:td] [:td]]
     ^{:key spouse}
     [family-row spouse children-ids generations]))
 
@@ -105,14 +109,24 @@
     ^{:key id}
     [:div {:style {:margin-top "2mm"}}
      [:table.tree
-      (into [:tbody [person-row id false]]
+      (into [:tbody (person-row id false)]
             (if (> generations 0)
               (mapcat (partial family-tree (dec generations)) families)))]])
 
 ; ------------- ancestor tree -------------
 
-(defn ancestor-tree [ generations person ]
-    (:parents person))
+(defn ancestor-tree [ generations { pid :id parent-ids :parents :as person} ]
+  (let [ parents (map (fn [id] @(re-frame/subscribe [:person-with-families id])) parent-ids)
+         [mother father] (sort-by :gender parents)]
+      (if (>= generations 0)
+      [:table.tree
+        [:tbody 
+          [:tr 
+              [:td (ancestor-tree (dec generations) father) ] 
+              [:td.middle {:rowspan 2 :style {:width "300px"}} (if pid [person-box pid false]) ]   ]
+          [:tr [:td (ancestor-tree (dec generations) mother) ]]
+
+                 ]])))
 
 (defn generation-button [n]
   (let [selected-generations @(re-frame/subscribe [:generations])]

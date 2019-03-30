@@ -16,13 +16,28 @@ td, th {
     vertical-align: top; /* 'text-top' allows labels and inputs all align! :-) */
 }
 
-table.tree td { padding: 0;}
+table.tree td { padding: 0; }
 
 .header { font-size: small; }
 
 .link { color: blue; text-decoration: underline; }
 
 .center { text-align: center; }
+
+.right { text-align: right; }
+
+.middle { vertical-align: middle; }
+
+.inline { display: inline; }
+
+.inline-block { display: inline-block; }
+
+.person-box { 
+    font-size: smaller; 
+    width: 250px;
+    vertical-align: middle;
+    border: solid 3px;
+}
 
 button.gen {
     margin: 1mm; position: relative; top: -1mm;
