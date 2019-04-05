@@ -95,8 +95,7 @@
      (list 
         ^{:key :arrow} [:td line-right ]
         ^{:key :children} [:td {:style {:border-left "solid black 3px"}}
-          (doall (map (partial descendant-tree generations) sorted-children))  ]
-          ))]))
+          (doall (map (partial descendant-tree generations) sorted-children))  ]))]))
 
 (defn family-tree [ generations { spouse :spouse children-ids :children }]
   (list
@@ -123,10 +122,8 @@
         [:tbody 
           [:tr 
               [:td (ancestor-tree (dec generations) father) ] 
-              [:td.middle {:rowspan 2 :style {:width "300px"}} (if pid [person-box pid false]) ]   ]
-          [:tr [:td (ancestor-tree (dec generations) mother) ]]
-
-                 ]])))
+              [:td.middle {:row-span 2 :style {:width "300px"}} (if pid [person-box pid false]) ]   ]
+          [:tr [:td (ancestor-tree (dec generations) mother) ]]    ]])))
 
 (defn generation-button [n]
   (let [selected-generations @(re-frame/subscribe [:generations])]
