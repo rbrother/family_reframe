@@ -72,10 +72,12 @@
       [:td.person-box {:style {
                       :border-color border-color
                       :background bg-color }}
-        (html/horiz-stack (if (first images) (html/image pid "small.png" nil))
-                     [:div (html/format-name (:name person) pid)
-                          (if profession [:span ", " profession])
-                          (html/format-life birth death)])    ]]]]))
+       (if (html/person-visible person)
+         (html/horiz-stack (if (first images) (html/image pid "small.png" nil))
+                           [:div (html/format-name (:name person) pid)
+                            (if profession [:span ", " profession])
+                            (html/format-life birth death)])
+         html/log-in-remainder)]]]]))
 
 (defn person-row [pid is-spouse]
   ^{:key pid}
@@ -104,13 +106,15 @@
     ^{:key spouse}
     [family-row spouse children-ids generations]))
 
-(defn descendant-tree [ generations {:keys [id families]} ]
+(defn descendant-tree [ generations {:keys [id families] :as person} ]
     ^{:key id}
     [:div {:style {:margin-top "2mm"}}
-     [:table.tree
-      (into [:tbody (person-row id false)]
-            (if (> generations 0)
-              (mapcat (partial family-tree (dec generations)) families)))]])
+     (if (html/person-visible person)
+       [:table.tree
+        (into [:tbody (person-row id false)]
+              (if (> generations 0)
+                (mapcat (partial family-tree (dec generations)) families)))]
+       html/log-in-remainder)])
 
 ; ------------- ancestor tree -------------
 
@@ -138,16 +142,18 @@
   (let [current-person @(re-frame/subscribe [:current-person])
         person @(re-frame/subscribe [:person-with-families current-person])
         generations @(re-frame/subscribe [:generations])]
-    [:div
-     [:h2 [:span.link {:on-click #(re-frame/dispatch [:show-person-list])} "Family Database"]
-      " - "
-      (format-name (:name person)) " (" (name (:id person)) ")" ]
-     [:table
-      [:tbody
-       [:tr
-        [:td (person-properties person)]
-        [:td (person-pictures person)]]]]
-     [:h2 "Ancestor tree - Generations" (generation-buttons) ]
-     (ancestor-tree generations person)
-     [:h2 "Descendant tree - Generations " (generation-buttons) ]
-     (descendant-tree generations person) ]))
+    (if (html/person-visible person)
+      [:div
+       [:h2 [:span.link {:on-click #(re-frame/dispatch [:show-person-list])} "Family Database"]
+        " - "
+        (format-name (:name person)) " (" (name (:id person)) ")"]
+       [:table
+        [:tbody
+         [:tr
+          [:td (person-properties person)]
+          [:td (person-pictures person)]]]]
+       [:h2 "Ancestor tree - Generations" (generation-buttons)]
+       (ancestor-tree generations person)
+       [:h2 "Descendant tree - Generations " (generation-buttons)]
+       (descendant-tree generations person)]
+      [:div html/log-in-remainder])))

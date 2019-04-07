@@ -1295,7 +1295,7 @@ Helsinki " ] :tag :Address }
               :tag :Person }
              {   :attrs { :childInfoMissing "false" :gender "Female" :id "P88" }
               :content [   { :attrs { :called "Inkeri" :first "Anna Inkeri" :last "Brotherus" } :content nil :tag :Name }
-                        { :attrs nil :content [ { :attrs { :Year "2001" } :content [ "2001.jpg" ] :tag :Image } ] :tag :Images }
+                        { :attrs nil :content nil :tag :Images }
                         { :attrs { :city "Helsinki" :time "1925-10-26" } :content nil :tag :Birth }
                         {   :attrs nil
                          :content [   { :attrs nil :content [ "Munkkiniemen puistotie 5 B
@@ -2514,7 +2514,7 @@ Helsinki" ] :tag :Address }
               :tag :Person }
              {   :attrs { :childInfoMissing "false" :gender "Female" :id "P95" }
               :content [   { :attrs { :called "Leena" :first "Irja Helena Kustaava" :last "Brotherus" :origLast "Sipilä" } :content nil :tag :Name }
-                        { :attrs nil :content [ { :attrs { :Year "1956" } :content [ "1956-haakuva.jpg" ] :tag :Image } ] :tag :Images }
+                        { :attrs nil :content nil :tag :Images }
                         { :attrs { :time "1930-07-22" } :content nil :tag :Birth }
                         { :attrs nil :content [ "Kotitalousopettaja" ] :tag :Profession }
                         { :attrs { :city "Helsinki" :time "1974" } :content nil :tag :Death }
@@ -2642,8 +2642,7 @@ Helsinki" ] :tag :Address }
              {   :attrs { :childInfoMissing "false" :gender "Female" :id "P84" }
               :content [   { :attrs { :first "Joseta Saskia" :last "Brotherus" :origLast "Ryynänen" } :content nil :tag :Name }
                         {   :attrs nil
-                         :content [   { :attrs { :Year "1997" } :content [ "1997.jpg" ] :tag :Image }
-                                   { :attrs { :Year "2008" } :content [ "2008.jpg" ] :tag :Image } ]
+                         :content nil
                          :tag :Images }
                         { :attrs { :time "1971" } :content nil :tag :Birth }
                         {   :attrs nil
@@ -3124,7 +3123,7 @@ Helsinki
              {   :attrs { :gender "Male" :id "P9" }
               :content [   { :attrs { :first "Myrsky Walter" :last "Brotherus" } :content nil :tag :Name }
                         { :attrs { :time "1997" } :content nil :tag :Birth }
-                        { :attrs nil :content [ { :attrs { :Year "2008" } :content [ "2008.jpg" ] :tag :Image } ] :tag :Images }
+                        { :attrs nil :content nil :tag :Images }
                         {   :attrs nil
                          :content [   { :attrs nil :content nil :tag :Email }
                                    { :attrs nil :content nil :tag :www }
@@ -5386,8 +5385,8 @@ olivat hänelle hyvin läheisiä.   " ]
                                    { :attrs nil :content nil :tag :Phone }
                                    { :attrs nil :content nil :tag :Address } ]
                          :tag :Contact }
-                        { :attrs nil :content nil :tag :Profession }
-                        { :attrs nil :content nil :tag :Career }
+                        { :attrs nil :content "Soccer player" :tag :Profession }
+                        { :attrs nil :content "Adrian Miilakangas oli suomalainen jalkapalloilija, joka päätti pelaajauransa kauden 1943–1944 jälkeen. Pelipaikaltaan hän oli maalivahti. Michalewicz pelasi HIFK:n ykkösmaalivahtina kaudet 1937–1938. Hän voitti Suomen mestaruuden HIFK:n riveissä kaudella 1937." :tag :Career }
                         { :attrs nil :content nil :tag :Miscallaneous }
                         { :attrs nil :content nil :tag :HiddenComment } ]
               :tag :Person }
@@ -5395,7 +5394,9 @@ olivat hänelle hyvin läheisiä.   " ]
               :content [   { :attrs { :called "" :first "Inge Margareta" :last "Lindgren" :origLast "Miilakangas" } :content nil :tag :Name }
                         { :attrs { :time "1940-07-27" } :content nil :tag :Birth }
                         { :attrs nil :content nil :tag :HiddenComment }
-                        { :attrs nil :content nil :tag :Images }
+                        { :attrs nil :content [
+                                               { :attrs { :Year "1980" } :content [ "1980.jpg" ] :tag :Image }
+                                               ] :tag :Images }
                         {   :attrs nil
                          :content [   { :attrs nil :content nil :tag :Email }
                                    { :attrs nil :content nil :tag :www }
@@ -5473,7 +5474,9 @@ olivat hänelle hyvin läheisiä.   " ]
               :tag :Person }
              {   :attrs { :childInfoMissing "false" :gender "Male" :id "P353" }
               :content [   { :attrs { :first "Jan Petri" :last "Lindgren" } :content nil :tag :Name }
-                        { :attrs nil :content nil :tag :Images }
+                        { :attrs nil :content [
+                                               { :attrs { :Year "2018" } :content [ "2018.jpg" ] :tag :Image }
+                                               ] :tag :Images }
                         { :attrs { :city "Helsinki" :time "1964-09-21" } :content nil :tag :Birth }
                         {   :attrs nil
                          :content [   { :attrs nil :content [ "petri.lindgren@consista.fi" ] :tag :Email }
@@ -5494,7 +5497,9 @@ olivat hänelle hyvin läheisiä.   " ]
               :content [   { :attrs { :first "Heikki Kristian" :last "Miilakangas" } :content nil :tag :Name }
                         { :attrs { :time "1943-02-06" } :content nil :tag :Birth }
                         { :attrs { :time "1988-06-28" } :content nil :tag :Death }
-                        { :attrs nil :content nil :tag :Images }
+                        { :attrs nil :content [
+                                               { :attrs { :Year "1980" } :content [ "1980.jpg" ] :tag :Image }
+                                               ] :tag :Images }
                         {   :attrs nil
                          :content [   { :attrs nil :content nil :tag :Email }
                                    { :attrs nil :content nil :tag :www }
@@ -5574,7 +5579,8 @@ olivat hänelle hyvin läheisiä.   " ]
               :content [   { :attrs { :called "Ebbe" :first "Ebbe Axel Erik" :last "Sommar" :origLast "" } :content nil :tag :Name }
                         {   :attrs nil
                          :content [   { :attrs { :Year "1932" } :content [ "1932.jpg" ] :tag :Image }
-                                   { :attrs { :Year "2010" } :content [ "2010.jpg" ] :tag :Image } ]
+                                   { :attrs { :Year "1980" } :content [ "1980.jpg" ] :tag :Image }
+                                   { :attrs { :Year "2019" } :content [ "2019.jpg" ] :tag :Image }]
                          :tag :Images }
                         { :attrs { :time "1928-03-27" } :content nil :tag :Birth }
                         {   :attrs nil
@@ -7818,7 +7824,7 @@ Tehtaankatu 28
               :tag :Person }
              {   :attrs { :gender "Female" :id "P86" }
               :content [   { :attrs { :first "Siiri" :last "Nunn" } :content nil :tag :Name }
-                        { :attrs nil :content [ { :attrs { :Year "2008" } :content [ "2008.jpg" ] :tag :Image } ] :tag :Images }
+                        { :attrs nil :content nil :tag :Images }
                         { :attrs nil :content nil :tag :Birth }
                         {   :attrs nil
                          :content [   { :attrs nil :content nil :tag :Email }
@@ -7916,8 +7922,7 @@ Tehtaankatu 28
               :content [   { :attrs { :first "Amendine Helene" :last "Freund" } :content nil :tag :Name }
                         { :attrs { :time "1999-04-21" } :content nil :tag :Birth }
                         {   :attrs nil
-                         :content [   { :attrs { :Year "2004" } :content [ "2004.jpg" ] :tag :Image }
-                                   { :attrs { :Year "2008" } :content [ "2008.jpg" ] :tag :Image } ]
+                         :content nil
                          :tag :Images }
                         {   :attrs nil
                          :content [   { :attrs nil :content nil :tag :Email }
@@ -8644,7 +8649,7 @@ Ranska
               :tag :Person }
              {   :attrs { :childInfoMissing "false" :gender "Male" :id "P89" }
               :content [   { :attrs { :first "Yrjö Olavi" :last "Saloheimo" } :content nil :tag :Name }
-                        { :attrs nil :content [ { :attrs { :Year "2001" } :content [ "2001.jpg" ] :tag :Image } ] :tag :Images }
+                        { :attrs nil :content nil :tag :Images }
                         { :attrs { :city "Oulu" :time "1944-08-20" } :content nil :tag :Birth }
                         {   :attrs nil
                          :content [   { :attrs nil :content nil :tag :Email }
@@ -15819,7 +15824,7 @@ Hukkui talvimyrskyssä dd.mm.yyyy. matkalla Liverpoolista Odessaan haaksirikossa
              {   :attrs { :childInfoMissing "true" :gender "Female" :id "P834" }
               :content [   { :attrs { :first "Olga" :last "Svinhufvud" :origLast "von Becker" } :content nil :tag :Name }
                         { :attrs { :city "kangasniemi" :time "1836-02-01" } :content nil :tag :Birth }
-                        { :attrs nil :content [ { :attrs { :Year "1860" } :content [ "1860.jpg" ] :tag :Image } ] :tag :Images }
+                        { :attrs nil :content nil :tag :Images }
                         {   :attrs nil
                          :content [   { :attrs nil :content nil :tag :Email }
                                    { :attrs nil :content nil :tag :www }
@@ -16083,30 +16088,7 @@ Avioliitot ja elämä kuvattu tiiviisti Einar V. Juvan kirjassa. On olemassa yks
                         { :attrs nil :content [ "P846" ] :tag :ParentID }
                         { :attrs nil :content [ "P841" ] :tag :ChildID } ]
               :tag :Family }
-             {   :attrs { :childInfoMissing "false" :gender "Female" :id "P847" }
-              :content [   { :attrs { :called "Diana" :first "Diana Corinne" :last "Brotherus" :origLast "Van Vugt" } :content nil :tag :Name }
-                        { :attrs { :city "Dordrecht, The Netherlands" :time "1978-11-25" } :content nil :tag :Birth }
-                        {   :attrs nil
-                         :content [   { :attrs { :Year "2006" } :content [ "2006.jpg" ] :tag :Image }
-                                   { :attrs { :Year "2008" } :content [ "2008.jpg" ] :tag :Image } ]
-                         :tag :Images }
-                        {   :attrs nil
-                         :content [   { :attrs nil :content [ "dianav@iki.fi" ] :tag :Email }
-                                   { :attrs nil :content nil :tag :www }
-                                   { :attrs nil :content [ "+358403735171" ] :tag :Phone }
-                                   { :attrs nil :content nil :tag :Address } ]
-                         :tag :Contact }
-                        { :attrs nil :content [ "Doctoral student, HY" ] :tag :Profession }
-                        {   :attrs nil
-                         :content [   "M.A. History, Erasmus University of Rotterdam
-M.A. Legal Theory, Erasmus University of Rotterdam
-LL.M. International Law, University of Helsinki
-LL.D. (doctoral) candidate in international law, University of Helsinki " ]
-                         :tag :Career }
-                        { :attrs nil :content nil :tag :Death }
-                        { :attrs nil :content nil :tag :Miscallaneous }
-                        { :attrs nil :content nil :tag :HiddenComment } ]
-              :tag :Person }
+
              {   :attrs { :childInfoMissing "true" :gender "Male" :id "P848" }
               :content [   { :attrs { :first "Bengt Axel" :last "Boije" } :content nil :tag :Name }
                         { :attrs { :time "1734-03-05" } :content nil :tag :Birth }
@@ -17469,7 +17451,7 @@ United Kingdom" ] :tag :Address } ]
              {   :attrs { :childInfoMissing "false" :gender "Female" :id "P925" }
               :content [   { :attrs { :called "Taina" :first "Taina Helena" :last "Martiskainen" :origLast "Martiskainen" } :content nil :tag :Name }
                         { :attrs { :city "Pielisjärvi" :time "1962-06-12" } :content nil :tag :Birth }
-                        { :attrs nil :content [ { :attrs { :Year "2006" } :content [ "picture.jpg" ] :tag :Image } ] :tag :Images }
+                        { :attrs nil :content nil :tag :Images }
                         {   :attrs nil
                          :content [   { :attrs nil :content nil :tag :Email }
                                    { :attrs nil :content nil :tag :www }
@@ -17490,7 +17472,7 @@ United Kingdom" ] :tag :Address } ]
              {   :attrs { :childInfoMissing "false" :gender "Female" :id "P926" }
               :content [   { :attrs { :called "Senja" :first "Senja Matilda" :last "Svinhufvud" :origLast "Svinhufvud" } :content nil :tag :Name }
                         { :attrs { :city "Helsinki" :time "2005-11-28" } :content nil :tag :Birth }
-                        { :attrs nil :content [ { :attrs { :Year "2006" } :content [ "picture.jpg" ] :tag :Image } ] :tag :Images }
+                        { :attrs nil :content nil :tag :Images }
                         {   :attrs nil
                          :content [   { :attrs nil :content nil :tag :Email }
                                    { :attrs nil :content nil :tag :www }
@@ -17501,12 +17483,12 @@ United Kingdom" ] :tag :Address } ]
                         { :attrs nil :content [ " " ] :tag :Career }
                         { :attrs nil :content nil :tag :Death }
                         { :attrs nil :content [ "-" ] :tag :Miscallaneous }
-                        { :attrs nil :content [ "Biologinen isa anonyymi" ] :tag :HiddenComment } ]
+                        { :attrs nil :content [ "Biologinen isä anonyymi" ] :tag :HiddenComment } ]
               :tag :Person }
              {   :attrs { :childInfoMissing "false" :gender "Male" :id "P927" }
               :content [   { :attrs { :called "Leo" :first "Leo Tapio" :last "Vesalainen" :origLast "" } :content nil :tag :Name }
                         { :attrs { :city "Rauma" } :content nil :tag :Birth }
-                        { :attrs nil :content [ { :attrs { :Year "2007" } :content [ "2007.jpg" ] :tag :Image } ] :tag :Images }
+                        { :attrs nil :content nil :tag :Images }
                         {   :attrs nil
                          :content [   { :attrs nil :content nil :tag :Email }
                                    { :attrs nil :content nil :tag :www }
@@ -18729,7 +18711,7 @@ United Kingdom" ] :tag :Address } ]
              {   :attrs { :childInfoMissing "false" :gender "Female" :id "P997" }
               :content [   { :attrs { :called "Maria" :first "Maria Elisabeth Margareta" :last "Svinhufvud" :origLast "Lundell" } :content nil :tag :Name }
                         { :attrs { :city "Grankulla" :time "1966-05-05" } :content nil :tag :Birth }
-                        { :attrs nil :content [ { :attrs { :Year "2007" } :content [ "maria_2007.jpg" ] :tag :Image } ] :tag :Images }
+                        { :attrs nil :content nil :tag :Images }
                         {   :attrs nil
                          :content [   { :attrs nil :content nil :tag :Email }
                                    { :attrs nil :content nil :tag :www }
@@ -19397,43 +19379,6 @@ Studerar ergoterapi vid Arcada " ] :tag :Career }
               :content [   { :attrs nil :content [ "P1040" ] :tag :ParentID }
                         { :attrs nil :content [ "P1041" ] :tag :ParentID }
                         { :attrs nil :content [ "P314" ] :tag :ChildID } ]
-              :tag :Family }
-             {   :attrs { :childInfoMissing "false" :gender "Male" :id "P1042" }
-              :content [   { :attrs { :called "Leo" :first "Leonardus Hendrikus " :last "Van Vugt" :origLast "Van Vugt" } :content nil :tag :Name }
-                        { :attrs { :city "Rotterdam" :time "1946-10-04" } :content nil :tag :Birth }
-                        { :attrs nil :content nil :tag :Images }
-                        {   :attrs nil
-                         :content [   { :attrs nil :content nil :tag :Email }
-                                   { :attrs nil :content nil :tag :www }
-                                   { :attrs nil :content nil :tag :Phone }
-                                   { :attrs nil :content nil :tag :Address } ]
-                         :tag :Contact }
-                        { :attrs nil :content nil :tag :Profession }
-                        { :attrs nil :content nil :tag :Career }
-                        { :attrs nil :content nil :tag :Death }
-                        { :attrs nil :content nil :tag :Miscallaneous }
-                        { :attrs nil :content nil :tag :HiddenComment } ]
-              :tag :Person }
-             {   :attrs { :childInfoMissing "false" :gender "Female" :id "P1043" }
-              :content [   { :attrs { :called "Adri" :first "Adriana" :last "Van Vugt " :origLast "Lokers" } :content nil :tag :Name }
-                        { :attrs { :city "Zevenbergen, The Netherlands" :time "1946-12-27" } :content nil :tag :Birth }
-                        { :attrs nil :content nil :tag :Images }
-                        {   :attrs nil
-                         :content [   { :attrs nil :content nil :tag :Email }
-                                   { :attrs nil :content nil :tag :www }
-                                   { :attrs nil :content nil :tag :Phone }
-                                   { :attrs nil :content nil :tag :Address } ]
-                         :tag :Contact }
-                        { :attrs nil :content nil :tag :Profession }
-                        { :attrs nil :content nil :tag :Career }
-                        { :attrs nil :content nil :tag :Death }
-                        { :attrs nil :content nil :tag :Miscallaneous }
-                        { :attrs nil :content nil :tag :HiddenComment } ]
-              :tag :Person }
-             {   :attrs nil
-              :content [   { :attrs nil :content [ "P1042" ] :tag :ParentID }
-                        { :attrs nil :content [ "P1043" ] :tag :ParentID }
-                        { :attrs nil :content [ "P847" ] :tag :ChildID } ]
               :tag :Family }
              {   :attrs { :childInfoMissing "false" :gender "Male" :id "P1044" :privacyLevel "DetailsPrivate" }
               :content [   { :attrs { :called "" :first "Simo" :last "Brotherus" :origLast "" } :content nil :tag :Name }
@@ -23965,7 +23910,7 @@ Tiden för dödsfallet okänd." ] :tag :Miscallaneous }
               :tag :Person }
              {   :attrs { :childInfoMissing "false" :gender "Male" :id "P1354" }
               :content [   { :attrs { :called "" :first "Karl Didrik" :last "Malm" :origLast "Malm" } :content nil :tag :Name }
-                        { :attrs nil :content nil :tag :Birth }
+                        { :attrs {:time "1820"} :content nil :tag :Birth }
                         { :attrs nil :content nil :tag :Images }
                         {   :attrs nil
                          :content [   { :attrs nil :content nil :tag :Email }
@@ -23976,12 +23921,12 @@ Tiden för dödsfallet okänd." ] :tag :Miscallaneous }
                         { :attrs nil :content nil :tag :Profession }
                         { :attrs nil :content nil :tag :Career }
                         { :attrs nil :content nil :tag :Death }
-                        { :attrs nil :content nil :tag :Miscallaneous }
+                        { :attrs nil :content "(Syntymäaika arvattu, selvitä)" :tag :Miscallaneous }
                         { :attrs nil :content nil :tag :HiddenComment } ]
               :tag :Person }
              {   :attrs { :childInfoMissing "false" :gender "Female" :id "P1355" }
               :content [   { :attrs { :called "" :first "Emilie" :last "Malm" :origLast "Paczynski von Tenczin" } :content nil :tag :Name }
-                        { :attrs { :city "Poland" } :content nil :tag :Birth }
+                        { :attrs { :city "Poland" :time "1820" } :content nil :tag :Birth }
                         { :attrs nil :content nil :tag :Images }
                         {   :attrs nil
                          :content [   { :attrs nil :content nil :tag :Email }
@@ -23993,7 +23938,7 @@ Tiden för dödsfallet okänd." ] :tag :Miscallaneous }
                         { :attrs nil :content nil :tag :Career }
                         { :attrs nil :content nil :tag :Death }
                         {   :attrs nil
-                         :content [   "Suku on peräisin Ylä-Sleesiasta (Puolan eteläosista). Paczynski von (tai und) Tenczineillä on sukuyhdistys Saksassa. Tietoja saattaa löytyä saksalaisesta aateliskalenterista.  " ]
+                         :content [   "(Syntymäaika arvattu, selvitä) Suku on peräisin Ylä-Sleesiasta (Puolan eteläosista). Paczynski von (tai und) Tenczineillä on sukuyhdistys Saksassa. Tietoja saattaa löytyä saksalaisesta aateliskalenterista.  " ]
                          :tag :Miscallaneous }
                         { :attrs nil :content nil :tag :HiddenComment } ]
               :tag :Person }

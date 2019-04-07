@@ -43,3 +43,10 @@ button.gen {
     margin: 1mm; position: relative; top: -1mm;
     font-size: large; font-weight: bold;
 }
+
+button.google-sso {
+    background-color: red;
+    color: white;
+    padding: 2mm;
+    font-weight: bold;
+}

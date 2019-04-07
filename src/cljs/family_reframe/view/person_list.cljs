@@ -10,16 +10,19 @@
    (let [persons @(re-frame/subscribe [:filtered-persons])]
      [:div (count persons) " persons"])])
 
-(defn person-row [{person-name :name :keys [id images profession birth death]}]
-  [:tr
-   [:td id]
-   [:td (if (first images) (html/image id "small.png" nil))]
-   [:td {:style { :width "9cm"}}
-    (html/format-name person-name id)
-    (if profession [:span ", " profession])]
-   [:td {:style { :width "8cm"}} (html/format-life birth death)]])
+(defn person-row [{person-name :name :keys [id images profession birth death] :as person}]
+  (let [show (html/person-visible person)]
+    [:tr
+     [:td id]
+     [:td (if (and show (first images)) (html/image id "small.png" nil))]
+     (if show
+       [:td {:style {:width "9cm"}}
+        (html/format-name person-name id)
+        (if profession [:span ", " profession])]
+       [:td html/log-in-remainder])
+     [:td {:style {:width "8cm"}} (if show (html/format-life birth death))]]))
 
-(defn person-list []
+(defn person-list [ ]
   (let [persons @(re-frame/subscribe [:filtered-persons])]
     [:table.even-odd
      (into [:tbody] (map person-row persons))]))

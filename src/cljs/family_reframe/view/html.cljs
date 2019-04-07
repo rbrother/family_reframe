@@ -38,3 +38,14 @@
   [:div
    (if birth-time [:div "s. " birth-time " " birth-city])
    (if death-time [:div "k. " death-time " " death-city]) ])
+
+(def log-in-button [:button {:on-click #(re-frame/dispatch [:login-start])} "Log In"])
+
+(def log-in-remainder [:span log-in-button " to show info of alive persons"])
+
+(defn person-visible [ {:keys [birth death]}]
+  (let [user @(re-frame/subscribe [:firebase-user])
+        birth-time (:time birth)
+        birth-year (if birth-time (int (subs birth-time 0 4)))
+        assume-dead (and birth-year (< birth-year 1920))]
+    (or user (:time death) assume-dead)))

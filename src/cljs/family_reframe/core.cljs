@@ -1,12 +1,11 @@
 (ns family-reframe.core
   (:require
-   [reagent.core :as reagent]
-   [re-frame.core :as re-frame]
-   [family-reframe.events :as events]
-   [family-reframe.views :as views]
-   [family-reframe.config :as config]
-   ))
-
+    [reagent.core :as reagent]
+    [re-frame.core :as re-frame]
+    [family-reframe.events :as events]
+    [family-reframe.views :as views]
+    [family-reframe.config :as config]
+    [family-reframe.firebase :as firebase]))
 
 (defn dev-setup []
   (when config/debug?
@@ -19,6 +18,7 @@
                   (.getElementById js/document "app")))
 
 (defn ^:export init []
+  (firebase/init)
   (re-frame/dispatch-sync [::events/initialize-db])
   (dev-setup)
   (mount-root))

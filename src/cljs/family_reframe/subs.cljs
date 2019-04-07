@@ -4,17 +4,27 @@
     [re-frame.core :as re-frame]
     [family-reframe.utils :as utils]))
 
+; Main data
+
 (re-frame/reg-sub :persons (fn [ db _ ] (:persons db) ))
+
+(re-frame/reg-sub :families (fn [ db _ ] (:families db)))
+
+; Small individual pieces of info
 
 (re-frame/reg-sub :filter-text (fn [ db _ ] (:filter-text db) ))
 
 (re-frame/reg-sub :page (fn [ db _ ] (:page db) ))
 
+(re-frame/reg-sub :error (fn [ db _ ] (:error db) ))
+
 (re-frame/reg-sub :current-person (fn [ db _ ] (:current-person db) ))
 
 (re-frame/reg-sub :generations (fn [ db _ ] (:generations db) ))
 
-(re-frame/reg-sub :families (fn [ db _ ] (:families db)))
+(re-frame/reg-sub :firebase-user (fn [ db _ ] (:firebase-user db) ))
+
+; Second-level subscriptions
 
 (re-frame/reg-sub
   :persons-index
@@ -44,17 +54,15 @@
         :families (map (partial expand-family id) raw-families)
         :parents (:parents parents-family)))))
 
-(defn person-index-entry [p]
-  { :text (str/upper-case (str p)) :person p } )
-
 (re-frame/reg-sub
   :persons-text-index
   :<- [ :persons ]
-  (fn [ persons _ ] (vec (map person-index-entry persons))))
+  (fn [ persons _ ]
+    (letfn [(entry [p] {:text (str/upper-case (str p)) :person p})]
+      (vec (map entry persons)))))
 
-(defn person-sort-func [p]
-  (let [birth-time (-> p :birth :time)]
-    (if birth-time birth-time "9999")))
+(defn person-sort-func [{:keys [birth death]}]
+  (or (:time birth) (:time death) "9999"))
 
 (re-frame/reg-sub
   :filtered-persons
